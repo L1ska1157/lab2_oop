@@ -19,10 +19,10 @@ public class Scientist(
     public string Position { get; } = position;
     public double Salary { get; } = salary;
 
-    public DateOnly HireDate { get; } = DateOnly.ParseExact(hireDate, "yyyy-MM-dd", null);
+    public DateOnly HireDate { get; } = DateOnly.ParseExact(hireDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
     public DateOnly? FireDate { get; } = !string.IsNullOrWhiteSpace(fireDate)
-        ? DateOnly.ParseExact(fireDate, "yyyy-MM-dd", null)
+        ? DateOnly.ParseExact(fireDate, "yyyy-MM-dd", CultureInfo.InvariantCulture)
         : null;
 
     public bool IsFired { get; } = !string.IsNullOrWhiteSpace(fireDate);

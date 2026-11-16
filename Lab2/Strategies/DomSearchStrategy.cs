@@ -34,7 +34,7 @@ public class DomSearchStrategy : ISearchStrategy
             if (!string.IsNullOrWhiteSpace(criteria.Position) && position != criteria.Position)
                 continue;
 
-            if (criteria.SalaryMin != null && salary > criteria.SalaryMin)
+            if (criteria.SalaryMin != null && salary > criteria.SalaryMax)
                 continue;
             
             if (criteria.SalaryMin != null && salary < criteria.SalaryMin)

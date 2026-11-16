@@ -46,7 +46,7 @@ public class LinqSearchStrategy : ISearchStrategy
         if (criteria.SalaryMax.HasValue)
         {
             elements = elements.Where(el =>
-                double.Parse((string)el.Attribute("salary")!) <= criteria.SalaryMax.Value);
+                double.Parse((string)el.Attribute("salary")!, CultureInfo.InvariantCulture) <= criteria.SalaryMax.Value);
         }
 
         return elements.Select(el =>
