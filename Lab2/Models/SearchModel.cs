@@ -1,18 +1,22 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace Lab2.Models;
 
-public class SearchModel : ISearchCriteria
+public partial class SearchModel : ObservableObject, ISearchCriteria
 {
-    public List<string> FacultyOptions { get; } = new();
-    public List<string> PositionOptions { get; } = new();
-    
-    public string? FullName { get; set; }
-    public string? Faculty { get; set; }
-    public string? Position { get; set; }
-    public bool? IsFired { get; set; }
-    public double? SalaryMin { get; set; }
-    public double? SalaryMax { get; set; }
+    [ObservableProperty] private List<string> _facultyOptions = new();
+    [ObservableProperty] private List<string> _departmentOptions = new();
+    [ObservableProperty] private List<string> _positionOptions = new();
 
-    void ClearFilters()
+    [ObservableProperty] private string? _fullName;
+    [ObservableProperty] private string? _faculty;
+    [ObservableProperty] private string? _department;
+    [ObservableProperty] private string? _position;
+    [ObservableProperty] private bool? _isFired;
+    [ObservableProperty] private double? _salaryMin;
+    [ObservableProperty] private double? _salaryMax;
+
+    public void ClearFilters()
     {
         FullName = null;
         Faculty = null;

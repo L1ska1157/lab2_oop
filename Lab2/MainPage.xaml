@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Lab2.ViewModels"
+             xmlns:strategies="clr-namespace:Lab2.Strategies"
+             x:Class="Lab2.MainPage"
+             x:DataType="vm:MainViewModel"
+             Title="Кадри науковців">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="10">
+
+            <Button Text="Обрати XML-файл" Command="{Binding PickFileCommand}" />
+            <Label Text="{Binding FilePath}" FontSize="12" />
+
+            <Label Text="Метод аналізу" />
+            <Picker ItemsSource="{Binding Strategies}"
+                    SelectedItem="{Binding SelectedStrategy}"
+                    ItemDisplayBinding="{Binding Name, x:DataType=strategies:ISearchStrategy}" />
+
+            <Label Text="ПІП (ключове слово)" />
+            <Entry Text="{Binding SearchFilters.FullName}" />
+
+            <Label Text="Факультет" />
+            <Picker ItemsSource="{Binding SearchFilters.FacultyOptions}"
+                    SelectedItem="{Binding SearchFilters.Faculty}" />
+
+            <Label Text="Посада" />
+            <Picker ItemsSource="{Binding SearchFilters.PositionOptions}"
+                    SelectedItem="{Binding SearchFilters.Position}" />
+
+            <Label Text="Статус" />
+            <Picker ItemsSource="{Binding StatusOptions}"
+                    SelectedIndex="{Binding StatusIndex}" />
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <VerticalStackLayout Grid.Column="0">
+                    <Label Text="Оклад від" />
+                    <Entry Text="{Binding SearchFilters.SalaryMin}" Keyboard="Numeric" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="1">
+                    <Label Text="Оклад до" />
+                    <Entry Text="{Binding SearchFilters.SalaryMax}" Keyboard="Numeric" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="8">
+                <Button Grid.Column="0" Text="Пошук" Command="{Binding SearchCommand}" />
+                <Button Grid.Column="1" Text="У HTML" Command="{Binding ExportCommand}" />
+                <Button Grid.Column="2" Text="Clear" Command="{Binding ClearCommand}" />
+                <Button Grid.Column="3" Text="Вихід" Command="{Binding ExitCommand}" />
+            </Grid>
+
+            <Editor Text="{Binding Output}" IsReadOnly="True" HeightRequest="300" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

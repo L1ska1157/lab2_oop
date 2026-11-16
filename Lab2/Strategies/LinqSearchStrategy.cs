@@ -8,9 +8,9 @@ public class LinqSearchStrategy : ISearchStrategy
 {
     public string Name => "LINQ";
 
-    public List<Scientist> Search(string filePath, ISearchCriteria criteria)
+    public List<Scientist> Search(Stream fileStream, ISearchCriteria criteria)
     {
-        XDocument doc = XDocument.Load(filePath);
+        XDocument doc = XDocument.Load(fileStream);
         var elements = doc.Root?.Elements("scientist") ?? Enumerable.Empty<XElement>();
         
         if (!string.IsNullOrWhiteSpace(criteria.Faculty))
@@ -28,7 +28,7 @@ public class LinqSearchStrategy : ISearchStrategy
             elements = elements.Where(el =>
             {
                 var name = (string?)el.Element("fullName");
-                return name != null && name.Contains(criteria.FullName);
+                return name != null && name.Contains(criteria.FullName, StringComparison.OrdinalIgnoreCase);
             });
         }
 
@@ -63,9 +63,9 @@ public class LinqSearchStrategy : ISearchStrategy
         }).ToList();
     }
 
-    public List<string> GetValues(string filePath, string attributeName)
+    public List<string> GetValues(Stream fileStream, string attributeName)
     {
-        var doc = XDocument.Load(filePath);
+        var doc = XDocument.Load(fileStream);
         var elements = doc.Root?.Elements("scientist") ?? Enumerable.Empty<XElement>();
 
         HashSet<string> options = new();

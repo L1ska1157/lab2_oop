@@ -8,12 +8,12 @@ public class DomSearchStrategy : ISearchStrategy
 {
     public string Name => "DOM";
 
-    public List<Scientist> Search(string filePath, ISearchCriteria criteria)
+    public List<Scientist> Search(Stream fileStream, ISearchCriteria criteria)
     {
         List<Scientist> results = new();
 
         XmlDocument doc = new();
-        doc.Load(filePath);
+        doc.Load(fileStream);
 
         XmlNodeList? nodes = doc.SelectNodes("/scientists/scientist");
         if (nodes == null) return results;
@@ -34,7 +34,7 @@ public class DomSearchStrategy : ISearchStrategy
             if (!string.IsNullOrWhiteSpace(criteria.Position) && position != criteria.Position)
                 continue;
 
-            if (criteria.SalaryMin != null && salary > criteria.SalaryMax)
+            if (criteria.SalaryMax != null && salary > criteria.SalaryMax)
                 continue;
             
             if (criteria.SalaryMin != null && salary < criteria.SalaryMin)
@@ -43,7 +43,7 @@ public class DomSearchStrategy : ISearchStrategy
             if (criteria.IsFired.HasValue && el.HasAttribute("fireDate") != criteria.IsFired.Value)
                 continue;
             
-            if (!string.IsNullOrWhiteSpace(criteria.FullName) && !fullName.Contains(criteria.FullName))
+            if (!string.IsNullOrWhiteSpace(criteria.FullName) && !fullName.Contains(criteria.FullName, StringComparison.OrdinalIgnoreCase))
                 continue;
 
             results.Add(new Scientist(
@@ -60,12 +60,12 @@ public class DomSearchStrategy : ISearchStrategy
         return results;
     }
 
-    public List<string> GetValues(string filePath, string attributeName)
+    public List<string> GetValues(Stream fileStream, string attributeName)
     {
         HashSet<string> options = new();
 
         XmlDocument doc = new();
-        doc.Load(filePath);
+        doc.Load(fileStream);
 
         XmlNodeList? nodes = doc.SelectNodes("/scientists/scientist");
         if (nodes == null) return options.ToList();
