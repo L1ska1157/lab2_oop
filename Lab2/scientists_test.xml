@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<scientists>
+    <!-- 1. Ф1 | Каф_А | Посада_X | Оклад 1000 | ЗВІЛЬНЕНИЙ | Ключ "Слово" -->
+    <scientist faculty="Факультет_1" department="Кафедра_А" position="Посада_X" salary="1000.00" hireDate="2020-01-10" fireDate="2023-05-15">
+        <fullName>Звільнений 1000 Слово Один</fullName>
+        <positionHistory>
+            <move date="2022-03-01" before="Стажер" after="Посада_X" />
+        </positionHistory>
+        <salaryHistory>
+            <change date="2022-03-01" before="800.00" after="1000.00" />
+        </salaryHistory>
+    </scientist>
+
+    <!-- 2. Ф1 | Каф_А | Посада_X | Оклад 1000 | ЗВІЛЬНЕНИЙ | Ключ "слово" (нижній регістр) -->
+    <scientist faculty="Факультет_1" department="Кафедра_А" position="Посада_X" salary="1000.00" hireDate="2021-02-15" fireDate="2024-02-20">
+        <fullName>Звільнений 1000 слово Два</fullName>
+        <positionHistory />
+        <salaryHistory />
+    </scientist>
+
+    <!-- 3. Ф1 | Каф_Б | Посада_Y | Оклад 2500.50 | ПРАЦЮЄ | Ключ "Слово" -->
+    <scientist faculty="Факультет_1" department="Кафедра_Б" position="Посада_Y" salary="2500.50" hireDate="2021-09-01">
+        <fullName>Працюючий 2500 Слово Один</fullName>
+        <positionHistory>
+            <move date="2023-01-01" before="Асистент" after="Посада_Y" />
+        </positionHistory>
+        <salaryHistory>
+            <change date="2023-01-01" before="2000.00" after="2500.50" />
+        </salaryHistory>
+    </scientist>
+
+    <!-- 4. Ф1 | Каф_Б | Посада_Y | Оклад 2500.50 | ПРАЦЮЄ | Ключ "СЛОВО" (верхній регістр) -->
+    <scientist faculty="Факультет_1" department="Кафедра_Б" position="Посада_Y" salary="2500.50" hireDate="2022-04-12">
+        <fullName>Працюючий 2500 СЛОВО Два</fullName>
+        <positionHistory />
+        <salaryHistory>
+            <change date="2023-06-01" before="2100.00" after="2500.50" />
+        </salaryHistory>
+    </scientist>
+
+    <!-- 5. Ф2 | Каф_В | Посада_X | Оклад 5000 | ПРАЦЮЄ | Без ключа (перевірка мульти-історії для XSLT) -->
+    <scientist faculty="Факультет_2" department="Кафедра_В" position="Посада_X" salary="5000.00" hireDate="2019-02-20">
+        <fullName>Працюючий 5000 БезКлюча Один</fullName>
+        <positionHistory>
+            <move date="2020-06-15" before="Асистент" after="Доцент" />
+            <move date="2023-09-01" before="Доцент" after="Посада_X" />
+        </positionHistory>
+        <salaryHistory>
+            <change date="2020-06-15" before="3000.00" after="4000.00" />
+            <change date="2023-09-01" before="4000.00" after="5000.00" />
+        </salaryHistory>
+    </scientist>
+
+    <!-- 6. Ф2 | Каф_В | Посада_Y | Оклад 5000 | ПРАЦЮЄ | Без ключа -->
+    <scientist faculty="Факультет_2" department="Кафедра_В" position="Посада_Y" salary="5000.00" hireDate="2020-10-10">
+        <fullName>Працюючий 5000 БезКлюча Два</fullName>
+        <positionHistory>
+            <move date="2022-01-15" before="Стажер" after="Посада_Y" />
+        </positionHistory>
+        <salaryHistory>
+            <change date="2022-01-15" before="3500.00" after="5000.00" />
+        </salaryHistory>
+    </scientist>
+
+    <!-- 7. Ф2 | Каф_Г | Посада_Z | Оклад 9999.99 | ЗВІЛЬНЕНИЙ | Історія-пастка (у минулому Посада_X та 1000.00) -->
+    <scientist faculty="Факультет_2" department="Кафедра_Г" position="Посада_Z" salary="9999.99" hireDate="2018-11-11" fireDate="2024-01-01">
+        <fullName>Звільнений 9999 ІсторіяПастка Один</fullName>
+        <positionHistory>
+            <move date="2021-01-01" before="Посада_X" after="Посада_Z" />
+        </positionHistory>
+        <salaryHistory>
+            <change date="2021-01-01" before="1000.00" after="9999.99" />
+        </salaryHistory>
+    </scientist>
+
+    <!-- 8. Ф2 | Каф_Г | Посада_Z | Оклад 9999.99 | ЗВІЛЬНЕНИЙ | Історія-пастка 2 -->
+    <scientist faculty="Факультет_2" department="Кафедра_Г" position="Посада_Z" salary="9999.99" hireDate="2017-05-05" fireDate="2024-06-30">
+        <fullName>Звільнений 9999 ІсторіяПастка Два</fullName>
+        <positionHistory>
+            <move date="2020-05-05" before="Посада_Y" after="Посада_Z" />
+        </positionHistory>
+        <salaryHistory>
+            <change date="2020-05-05" before="2500.50" after="9999.99" />
+        </salaryHistory>
+    </scientist>
+</scientists>
