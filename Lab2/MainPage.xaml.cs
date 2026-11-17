@@ -5,9 +5,9 @@ namespace Lab2;
 
 public partial class MainPage : ContentPage
 {
-    public MainPage(MainViewModel vm)
+    public MainPage()
     {
         InitializeComponent();
-        BindingContext = vm;
+        BindingContext = new MainViewModel();
     }
 }

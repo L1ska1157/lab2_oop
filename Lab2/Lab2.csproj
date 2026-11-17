@@ -4,8 +4,6 @@
         <ApplicationId>com.companyname.lab2</ApplicationId>
         
         <TargetFramework>net10.0-maccatalyst</TargetFramework>
-        <TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('linux'))">$(TargetFrameworks);net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
-        <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
         <OutputType>Exe</OutputType>
         
         <UseMaui>true</UseMaui>
@@ -48,6 +46,10 @@
       <Content Include="Platforms\Windows\App.xaml" />
       <Content Include="Resources\Styles\Colors.xaml" />
       <Content Include="Resources\Styles\Styles.xaml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="ExportingResults\" />
     </ItemGroup>
 
 </Project>

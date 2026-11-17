@@ -4,7 +4,6 @@
              xmlns:vm="clr-namespace:Lab2.ViewModels"
              xmlns:strategies="clr-namespace:Lab2.Strategies"
              x:Class="Lab2.MainPage"
-             x:DataType="vm:MainViewModel"
              Title="Кадри науковців">
 
     <ScrollView>
@@ -36,18 +35,18 @@
             <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
                 <VerticalStackLayout Grid.Column="0">
                     <Label Text="Оклад від" />
-                    <Entry Text="{Binding SearchFilters.SalaryMin}" Keyboard="Numeric" />
+                    <Entry Text="{Binding SalaryMinText}" Keyboard="Numeric" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Column="1">
                     <Label Text="Оклад до" />
-                    <Entry Text="{Binding SearchFilters.SalaryMax}" Keyboard="Numeric" />
+                    <Entry Text="{Binding SalaryMaxText}" Keyboard="Numeric" />
                 </VerticalStackLayout>
             </Grid>
 
             <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="8">
                 <Button Grid.Column="0" Text="Пошук" Command="{Binding SearchCommand}" />
                 <Button Grid.Column="1" Text="У HTML" Command="{Binding ExportCommand}" />
-                <Button Grid.Column="2" Text="Clear" Command="{Binding ClearCommand}" />
+                <Button Grid.Column="2" Text="Очистити" Command="{Binding ClearCommand}" />
                 <Button Grid.Column="3" Text="Вихід" Command="{Binding ExitCommand}" />
             </Grid>
 

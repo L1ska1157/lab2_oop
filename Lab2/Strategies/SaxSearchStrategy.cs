@@ -26,34 +26,34 @@ public class SaxSearchStrategy : ISearchStrategy
 
                 if (!string.IsNullOrWhiteSpace(criteria.Faculty) && faculty != criteria.Faculty)
                 {
-                    reader.Skip();
+                    continue;
                 }
 
 
                 if (!string.IsNullOrWhiteSpace(criteria.Position) && position != criteria.Position)
                 {
-                    reader.Skip();
+                    continue;
                 }
 
                 if (criteria.SalaryMax != null && salary > criteria.SalaryMax)
                 {
-                    reader.Skip();
+                    continue;
                 }
 
                 if (criteria.SalaryMin != null && salary < criteria.SalaryMin)
                 {
-                    reader.Skip();
+                    continue;
                 }
                 
                 if (criteria.IsFired.HasValue && (fireDate != null) != criteria.IsFired.Value)
                 {
-                    reader.Skip();
+                    continue;
                 }
 
-                string fullName = "";
-                
-                if (reader.NodeType == XmlNodeType.Element && reader.Name == "fullName")
-                    fullName = reader.ReadElementContentAsString();
+                if (!reader.ReadToDescendant("fullName"))
+                    continue;
+
+                string fullName = reader.ReadElementContentAsString();
 
                 if (!string.IsNullOrWhiteSpace(criteria.FullName) && !fullName.Contains(criteria.FullName, StringComparison.OrdinalIgnoreCase))
                     continue;

@@ -25,4 +25,13 @@ public partial class SearchModel : ObservableObject, ISearchCriteria
         SalaryMin = null;
         SalaryMax = null;
     }
+
+    public override string ToString()
+    {
+        return $"Full name: {FullName}\n" +
+               $"Faculty: {Faculty}\n" +
+               $"Position: {Position}\n" +
+               $"IsFired: {IsFired}\n" +
+               $"Salary: {SalaryMin}-{SalaryMax}";
+    }
 }

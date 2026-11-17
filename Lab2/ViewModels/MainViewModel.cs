@@ -1,12 +1,10 @@
+using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Lab2.Models;
 using Lab2.Strategies;
 using System.Xml;
 using Lab2.Services;
-using Microsoft.Maui.ApplicationModel;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Storage;
 
 namespace Lab2.ViewModels;
 
@@ -30,6 +28,30 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty] private string _output = "";
     [ObservableProperty] private int _statusIndex;
     [ObservableProperty] private ISearchStrategy _selectedStrategy;
+    
+    [ObservableProperty] private string? _salaryMinText;
+    [ObservableProperty] private string? _salaryMaxText;
+
+    public double? SalaryMin { get; private set; }
+    public double? SalaryMax { get; private set; }
+
+    partial void OnSalaryMinTextChanged(string? value)
+    {
+        Debug.WriteLine($"[MY]Min salary changed to {value}");
+        if (string.IsNullOrWhiteSpace(value))
+            SalaryMin = null;
+        else if (double.TryParse(value, out double result))
+            SalaryMin = result;
+    }
+
+    partial void OnSalaryMaxTextChanged(string? value)
+    {
+        Debug.WriteLine($"[MY]Max salary changed to {value}");
+        if (string.IsNullOrWhiteSpace(value))
+            SalaryMax = null;
+        else if (double.TryParse(value, out double result))
+            SalaryMax = result;
+    }
 
     private bool HasFile() => SelectedFile is not null;
     private bool HasResults() => Results.Count > 0;
@@ -49,7 +71,8 @@ public partial class MainViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            await CurrentPage.DisplayAlert("Помилка", ex.Message, "OK");
+            Debug.WriteLine($"[ERROR] {ex.Message}");
+            await CurrentPage.DisplayAlert("Помилка", "Під час пошуку виникла помилка", "OK");
         }
     }
 
@@ -58,9 +81,9 @@ public partial class MainViewModel : ObservableObject
     {
         try
         {
-            string path = Path.Combine(FileSystem.AppDataDirectory, "result.html");
+            string path = $"/Users/l1ska/Developer/OOP/Lab2/Lab2/ExportingResults/result_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.html";
 
-            using (Stream xslStream = await FileSystem.OpenAppPackageFileAsync("HtmlTemplate.xsl"))
+            using (Stream xslStream = await FileSystem.OpenAppPackageFileAsync("/Users/l1ska/Developer/OOP/Lab2/Lab2/Resources/HtmlTemplate.xsl"))
             using (XmlReader xsl = XmlReader.Create(xslStream))
             using (FileStream file = File.Create(path))
             {
@@ -71,7 +94,8 @@ public partial class MainViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            CurrentPage.DisplayAlert("Помилка", ex.Message, "OK");
+            Debug.WriteLine($"[ERROR] {ex.Message}");
+            CurrentPage.DisplayAlert("Помилка", "Не вдалося експортувати дані", "OK");
         }
     }
 
@@ -130,7 +154,8 @@ public partial class MainViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            await CurrentPage.DisplayAlert("Помилка", ex.Message, "OK");
+            Debug.WriteLine($"[ERROR] {ex.Message}");
+            await CurrentPage.DisplayAlert("Помилка", "Не вдалося завантажити файл", "OK");
         }
     }
 }
